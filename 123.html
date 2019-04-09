@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // console.log(1)
+    // new Promise(function (resolve, reject) {
+    //   reject(true)
+    //   setTimeout(function () {
+    //     resolve(false)
+    //   }, 0)
+    // }).then(function () {
+    //   console.log(2)
+    // }, function () {
+    //   console.log(4)
+    // })
+    // console.log(4)
+
+    // for (var i = 1; i < 6; i++) {
+    //   setTimeout(function timer() {
+    //     console.log(i)
+    //   }, i * 1000)
+    // }
+
+    function M() {
+      let args = [...arguments]
+      if (!args[0] || args[0] === 0 || args[1] === 0) {
+        return 0
+      }
+      if (args[0] && typeof args[0] !== 'number') {
+        return error
+      }
+      let n = args[0]
+      return (s) => {
+        if (args[1]) {
+          n *= args[1]
+        }
+        if (typeof s === 'underfined') {
+          return n
+        }
+        return M(n, s)
+      }
+    }
+    M(1)(2)(3)(4)()
+  </script>
+</body>
+
+</html>
