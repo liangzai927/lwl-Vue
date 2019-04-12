@@ -48,9 +48,50 @@ Vue.filter('dateFormat', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
   return moment(dataStr).format(pattern)
 })
 
+//引入vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {
+    //用一个空数组接收
+    car: []
+  },
+  mutations: {
+    //定义一个方法改变car内容
+    addCar: function (state, obj) {
+      // console.log(obj)
+      var flag = false
+      state.car.some(item => {
+        if (item.id == obj.id) {
+          item.count += parseInt(obj.count)
+          flag = true
+          return true
+        }
+      })
+      if (!flag) {
+        state.car.push(obj)
+      }
+    }
+  },
+  getters: {
+    total(state) {
+      var sum = 0
+      state.car.forEach(item => {
+        sum += parseInt(item.count)
+      })
+      console.log(sum)
+      return sum
+    }
+  },
+  actions: {}
+})
+
+
 //创建vm实例
 var vm = new Vue({
   el: '#app',
   render: c => c(app),
-  router
+  router,
+  store
 })
